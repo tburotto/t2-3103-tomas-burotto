@@ -132,7 +132,7 @@ class HamburguesaController < ApplicationController
                         k = true
                         @hamburguesa.ingredientes << @ingrediente
                         @hamburguesa.save
-                        render json: @hamburguesa, status: :ok
+                        render json: {"message": "Ingrediente agregado"}, status: :created
                     end
                     if !k
                         render json: {"message": "Ingrediente ya esta en hamburguesa"}, status: :conflict
