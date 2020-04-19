@@ -24,11 +24,9 @@ ActiveRecord::Schema.define(version: 2020_04_19_043214) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "hamburguesas_ingredientes", force: :cascade do |t|
-    t.bigint "hamburguesas_id"
-    t.bigint "ingredientes_id"
-    t.index ["hamburguesas_id"], name: "index_hamburguesas_ingredientes_on_hamburguesas_id"
-    t.index ["ingredientes_id"], name: "index_hamburguesas_ingredientes_on_ingredientes_id"
+  create_table "hamburguesas_ingredientes", id: false, force: :cascade do |t|
+    t.bigint "hamburguesa_id", null: false
+    t.bigint "ingrediente_id", null: false
   end
 
   create_table "ingredientes", force: :cascade do |t|

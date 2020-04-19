@@ -1,3 +1,5 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  resources :hamburguesa
+  resources :ingrediente
+  put 'hamburguesa/:id_hamburguesa/ingrediente/:id_ingrediente' => 'hamburguesa#editingrediente'
 end

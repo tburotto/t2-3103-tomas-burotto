@@ -6,9 +6,7 @@ class CreateIngredientes < ActiveRecord::Migration[6.0]
 
       t.timestamps
     end
-    create_table :hamburguesas_ingredientes do |t|
-      t.belongs_to :hamburguesas
-      t.belongs_to :ingredientes
+    create_join_table :hamburguesas, :ingredientes do |t|
     end
   end
 end
