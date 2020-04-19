@@ -1,24 +1,5 @@
-# README
+# Tarea 2 - Tomas Burotto Clement
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+La API rest fue creada en Ruby on Rails, basandose en los endpoints descritos en https://app.swaggerhub.com/apis-docs/Snorlax8/Burguer/1.0.0
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+La API se encuentra en producción en https://hamburguesasapi.herokuapp.com/
