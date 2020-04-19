@@ -13,7 +13,7 @@ class HamburguesaController < ApplicationController
             }
             
             hamburguesa.ingredientes.each do |ingrediente|
-                item["ingredientes"] << {"path" => "http://localhost:3000/ingrediente/"+ingrediente.id.to_s}
+                item["ingredientes"] << {"path" => "https://hamburguesasapi.herokuapp.com/ingrediente/"+ingrediente.id.to_s}
             end
             @result << item
         end
@@ -35,7 +35,7 @@ class HamburguesaController < ApplicationController
                     "ingredientes" => []
                 }
                 @hamburguesa.ingredientes.each do |ingrediente|
-                    @respuesta['ingredientes'] << {"path" => "http://localhost:3000/ingrediente/"+ingrediente.id.to_s}
+                    @respuesta['ingredientes'] << {"path" => "https://hamburguesasapi.herokuapp.com/"+ingrediente.id.to_s}
                 end
                 render json: @respuesta, status: :created
             else 
