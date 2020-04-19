@@ -121,23 +121,50 @@ class HamburguesaController < ApplicationController
         end
     end
 
-    def editingrediente
-        id_hamburguesa = params[:id_hamburguesa].to_i
-        id_ingrediente = params[:id_ingrediente].to_i
-        @hamburguesa = Hamburguesa.find_by(id: id_hamburguesa)
-        @ingrediente = Ingrediente.find_by(id: id_ingrediente)
-
-        @hamburguesa.ingredientes << @ingrediente
-
-        @hamburguesa.save
-
-        render json: @hamburguesa, status: :ok
-
+    def edit_ingrediente
+        id_hamburguesa = params[:id_hamburguesa]
+        id_ingrediente = params[:id_ingrediente]
+        if id_ingrediente.to_i.to_s == id_ingrediente and id_hamburguesa.to_i.to_s == id_hamburguesa
+            if @hamburguesa = Hamburguesa.find_by(id: id_hamburguesa)
+                if @ingrediente = Ingrediente.find_by(id: id_ingrediente)
+                    k = false
+                    unless @hamburguesa.ingredientes.include?(@ingrediente)
+                        k = true
+                        @hamburguesa.ingredientes << @ingrediente
+                        @hamburguesa.save
+                        render json: @hamburguesa, status: :ok
+                    end
+                    if !k
+                        render json: {"message": "Ingrediente ya esta en hamburguesa"}, status: :conflict
+                    end
+                else
+                    render json: {"message": "Ingrediente no existente"}, status: :not_found
+                end
+            else
+                render json: {"message": "Hamburguesa no existente"}, status: :not_found
+            end
+        else
+            render json: {"message": "Id de hamburguesa y-o ingrediente invalido(s)"}, status: :bad_request
+        end
     end
-end
 
-private
-
-def hamburguesa_params
-    params.require(:hamburguesa).permit(:nombre, :precio, :descripcion, :imagen)
+    def delete_ingrediente
+        id_hamburguesa = params[:id_hamburguesa]
+        id_ingrediente = params[:id_ingrediente]
+        if id_ingrediente.to_i.to_s == id_ingrediente and id_hamburguesa.to_i.to_s == id_hamburguesa
+            if @hamburguesa = Hamburguesa.find_by(id: id_hamburguesa)
+                if @ingrediente = Ingrediente.find_by(id: id_ingrediente)
+                    @hamburguesa.ingredientes.delete(@ingrediente)
+                    @hamburguesa.save
+                    render json:{"message": "Ingrediente retirado"}, status: :ok
+                else
+                    render json: {"message": "Ingrediente inexistente en la hamburguesa"}, status: :not_found
+                end
+            else
+                render json: {"message": "Hamburguesa inexistente"}, status: :not_found
+            end
+        else
+            render json: {"message": "Id de hamburguesa y-o ingrediente invalido(s)"}, status: :bad_request
+        end
+    end
 end
