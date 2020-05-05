@@ -77,10 +77,7 @@ class HamburguesaController < ApplicationController
             id = params["id"]
             if id.to_i.to_s == id
                 if @hamburguesa = Hamburguesa.find_by(id: params["id"])
-                    @hamburguesa.nombre = body["nombre"]
-                    @hamburguesa.precio = body["precio"]
-                    @hamburguesa.descripcion = body["descripcion"]
-                    @hamburguesa.imagen = body["imagen"]
+                    @hamburguesa.update(body)
                     @hamburguesa.save
 
                     @respuesta = {
